@@ -5,7 +5,7 @@ version: '3.8'
 services:
   # app service for your backend
   app:
-    container_name: backend
+    container_name: weekly-menu-api
     build:
       context: ./
       dockerfile: Dockerfile
@@ -15,7 +15,7 @@ services:
       DATABASE_PASS: 'p@ssw0rd'
       DATABASE_URI:  'mongodb://database:27017'
     ports:
-      - '5001:5001'
+      - '5001:3000'
     depends_on:
       - database
 
@@ -27,5 +27,5 @@ services:
     ports:
       - '27017:27017'
     environment:
-      MONGODB_INITDB_ROOT_USERNAME: # DATABASE_NAME
-      MONGODB_INITDB_ROOT_PASSWORD: # DATABASE_USER
+      MONGODB_INITDB_ROOT_USERNAME: 'admin'
+      MONGODB_INITDB_ROOT_PASSWORD: 'p@ssw0rd'
