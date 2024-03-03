@@ -6,10 +6,11 @@ import {
   Inject,
   Param,
   Post,
+  Put,
 } from '@nestjs/common';
 import { FamiliesService } from './families.service';
 import { Family } from './family.schema';
-import { FamilyDto } from './family.dto';
+import { AddMemberDto, FamilyDto } from './family.dto';
 import { formatFamily } from '@families/helpers';
 
 @Controller('families')
@@ -33,10 +34,15 @@ export class FamiliesController {
     return this.familiesService.findOne(id);
   }
 
-  @Post(':id/members/:userId')
+  @Get('user/:userId')
+  async findFamilyByUser(@Param('userId') userId: string): Promise<Family> {
+    return this.familiesService.findFamilyByUser(userId);
+  }
+
+  @Put(':id')
   async addMember(
     @Param('id') id: string,
-    @Param('userId') userId: string,
+    @Body() { userId }: AddMemberDto,
   ): Promise<FamilyDto> {
     return formatFamily(await this.familiesService.addMember(id, userId));
   }

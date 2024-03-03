@@ -25,18 +25,7 @@ export class FamiliesService {
   }
 
   async addMember(id: string, userId: string): Promise<Family> {
-    const family = await this.familyModel.findById(id).populate('users').exec();
-    const user = await this.userModel.findById(userId).exec();
-    if (!family.users) {
-      family.users = [];
-    }
-    if (!user) {
-      throw new Error('User not found');
-    }
-    if (family.users.find((u) => u.email === user.email) === undefined) {
-      family.users.push(user);
-    }
-    return family.save();
+    return this.familyModel.findByIdAndUpdate(id, { $push: { users: userId } });
   }
 
   async removeMember(id: string, userId: string): Promise<Family> {
@@ -44,5 +33,9 @@ export class FamiliesService {
     const user = await this.userModel.findById(userId).exec();
     family.users = family.users.filter((u) => u.email !== user.email);
     return family.save();
+  }
+
+  async findFamilyByUser(userId: string): Promise<Family> {
+    return this.familyModel.findOne({ users: userId }).populate('users').exec();
   }
 }

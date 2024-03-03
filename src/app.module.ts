@@ -5,14 +5,16 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { UsersModule } from '@users/users.module';
 import { ThrottlerModule } from '@nestjs/throttler';
 import { ConfigModule } from '@nestjs/config';
-import { FamiliesModule } from './families/families.module';
+import { FamiliesModule } from '@families/families.module';
 import { WeeksModule } from './weeks/weeks.module';
+import * as process from 'process';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     ThrottlerModule.forRoot(),
     MongooseModule.forRoot(process.env.DATABASE_URI, {
+      dbName: process.env.DATABASE_NAME,
       auth: {
         username: process.env.DATABASE_USER,
         password: process.env.DATABASE_PASS,
