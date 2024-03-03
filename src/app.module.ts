@@ -6,7 +6,7 @@ import { UsersModule } from '@users/users.module';
 import { ThrottlerModule } from '@nestjs/throttler';
 import { ConfigModule } from '@nestjs/config';
 import { FamiliesModule } from '@families/families.module';
-import { WeeksModule } from './weeks/weeks.module';
+import { WeeksModule } from '@weeks/weeks.module';
 import * as process from 'process';
 
 @Module({

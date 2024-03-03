@@ -14,6 +14,7 @@ RUN yarn build
 FROM node:20
 
 WORKDIR /app
+ENV NODE_ENV=production
 
 COPY --from=build /app/package.json ./
 
@@ -21,4 +22,4 @@ RUN yarn --production
 
 COPY --from=build /app/dist ./dist
 
-CMD ["yarn", "start"]
+CMD ["node", "dist/main.js"]
