@@ -9,6 +9,9 @@ services:
     build:
       context: ./
       dockerfile: Dockerfile
+    restart: always
+    mem_reservation: 500m
+    cpu_count: 2
     environment:
       DATABASE_NAME: 'weekly-menu'
       DATABASE_USER: 'admin'
@@ -24,6 +27,8 @@ services:
     image: mongodb/mongodb-community-server:latest
     container_name: weekly-menu-db
     restart: always
+    mem_reservation: 300m
+    cpu_count: 1
     ports:
       - '27017:27017'
     environment:
