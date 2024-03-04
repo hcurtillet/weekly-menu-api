@@ -18,7 +18,7 @@ services:
       DATABASE_PASS: 'p@ssw0rd'
       DATABASE_URI:  'mongodb://weekly-menu-db:27017'
     ports:
-      - '5001:5001'
+      - '5001:3000'
     depends_on:
       - database
 
