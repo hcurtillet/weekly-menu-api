@@ -22,6 +22,8 @@ jobs:
                 docker compose build
     dev:
         if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/develop'
+        environment:
+            name: Development
         needs: build
         runs-on: self-hosted
         steps:
@@ -37,6 +39,8 @@ jobs:
                 docker compose --env-file .env.dev up -d
     release:
         if: github.ref == 'refs/heads/master'
+        environment:
+            name: Production
         needs: dev
         runs-on: self-hosted
         steps:
