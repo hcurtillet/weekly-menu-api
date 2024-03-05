@@ -17,6 +17,24 @@ jobs:
             - name: Build
               run:
                 docker compose build
-            - name: Run
+    dev:
+        runs-on: self-hosted
+        steps:
+            - name: Checkout Repository
+              uses: actions/checkout@v2
+            - name: Set up Docker Buildx
+              uses: docker/setup-buildx-action@v1
+            - name: Build
               run:
-                docker compose up -d
+                docker compose up --env-file .env.dev -d
+    release:
+        runs-on: self-hosted
+        steps:
+            - name: Checkout Repository
+              uses: actions/checkout@v2
+            - name: Set up Docker Buildx
+              uses: docker/setup-buildx-action@v1
+            - name: Build
+              run:
+                docker compose up --env-file .env.prod -d
+                docker compose down

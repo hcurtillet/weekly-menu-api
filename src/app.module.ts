@@ -13,22 +13,13 @@ import * as process from 'process';
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     ThrottlerModule.forRoot(),
-    MongooseModule.forRoot(
-      (() => {
-        console.log(process.env.DATABASE_URI);
-        return process.env.DATABASE_URI;
-      })(),
-      {
-        dbName: process.env.DATABASE_NAME,
-        auth: {
-          username: (() => {
-            console.log(process.env.DATABASE_USER);
-            return process.env.DATABASE_USER;
-          })(),
-          password: process.env.DATABASE_PASS,
-        },
+    MongooseModule.forRoot(process.env.DATABASE_URI, {
+      dbName: process.env.DATABASE_NAME,
+      auth: {
+        username: process.env.DATABASE_USER,
+        password: process.env.DATABASE_PASS,
       },
-    ),
+    }),
     UsersModule,
     FamiliesModule,
     WeeksModule,
