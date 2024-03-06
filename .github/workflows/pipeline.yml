@@ -22,7 +22,8 @@ jobs:
             - name: Set up Environment
               shell: bash
               run: |
-                sed 's/DATABASE_PASS=.*/DATABASE_PASS=$DATABASE_PASS/g' .env.dev > .env.dev
+                echo $DATABASE_PASS 
+                | sed 's/DATABASE_PASS=.*/DATABASE_PASS=$DATABASE_PASS/g' .env.dev > .env.dev
               env:
                 DATABASE_PASS: ${{ secrets.DATABASE_PASS }}
             - name: Build
