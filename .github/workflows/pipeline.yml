@@ -23,9 +23,8 @@ jobs:
               shell: bash
               run: |
                 echo "DATABASE_PASS=${{ secrets.DATABASE_PASS }}" > .env.dev
-              with:
-                env:
-                  DATABASE_PASS: ${{ secrets.DATABASE_PASS }}
+              env:
+                DATABASE_PASS: ${{ secrets.DATABASE_PASS }}
             - name: Build
               run:
                 docker compose --env-file .env.dev build
@@ -43,9 +42,8 @@ jobs:
               shell: bash
               run: |
                 echo "DATABASE_PASS=${{ secrets.DATABASE_PASS }}" > .env.prod
-              with:
-                env:
-                  DATABASE_PASS: ${{ secrets.DATABASE_PASS }}
+              env:
+                DATABASE_PASS: ${{ secrets.DATABASE_PASS }}
             - name: Build
               run:
                 docker compose --env-file .env.prod build
@@ -64,9 +62,8 @@ jobs:
               shell: bash
               run: |
                 echo "DATABASE_PASS=${{ secrets.DATABASE_PASS }}" > .env.prod
-              with:
-                env:
-                  DATABASE_PASS: ${{ secrets.DATABASE_PASS }}
+              env:
+                DATABASE_PASS: ${{ secrets.DATABASE_PASS }}
             - name: Build
               run:
                 docker compose --env-file .env.dev up -d
@@ -85,9 +82,8 @@ jobs:
               shell: bash
               run: |
                 echo "DATABASE_PASS=${{ secrets.DATABASE_PASS }}" > .env.prod
-              with:
-                env:
-                  DATABASE_PASS: ${{ secrets.DATABASE_PASS }}
+              env:
+                DATABASE_PASS: ${{ secrets.DATABASE_PASS }}
             - name: Build
               run:
                 docker compose --env-file .env.prod up -d
