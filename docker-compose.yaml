@@ -16,7 +16,7 @@ services:
       DATABASE_NAME: ${DATABASE_NAME}
       DATABASE_USER: ${DATABASE_USER}
       DATABASE_PASS: ${DATABASE_PASS}
-      DATABASE_URI:  'mongodb://${DB_CONTAINER_NAME}:27017
+      DATABASE_URI:  mongodb://${DB_CONTAINER_NAME}:27017
     ports:
       - ${API_EXTERNAL_PORT}:3000
     depends_on:
