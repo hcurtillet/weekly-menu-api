@@ -22,7 +22,7 @@ jobs:
             - name: Set up Environment
               shell: bash
               run: |
-                echo "DATABASE_PASS=$DATABASE_PASS" > .env.dev
+                sed 's/DATABASE_PASS=.*/DATABASE_PASS=$DATABASE_PASS/g' .env.dev > .env.dev
               env:
                 DATABASE_PASS: ${{ secrets.DATABASE_PASS }}
             - name: Build
@@ -41,7 +41,7 @@ jobs:
             - name: Set up Environment
               shell: bash
               run: |
-                echo "DATABASE_PASS=$DATABASE_PASS" > .env.prod
+                sed 's/DATABASE_PASS=.*/DATABASE_PASS=$DATABASE_PASS/g' .env.prod > .env.prod
               env:
                 DATABASE_PASS: ${{ secrets.DATABASE_PASS }}
             - name: Build
@@ -58,10 +58,10 @@ jobs:
               uses: actions/checkout@v2
             - name: Set up Docker Buildx
               uses: docker/setup-buildx-action@v1
-            - name: Set up Environment
+            - name: Set up Environment and replace secrets
               shell: bash
               run: |
-                echo "DATABASE_PASS=$DATABASE_PASS" > .env.prod
+                sed 's/DATABASE_PASS=.*/DATABASE_PASS=$DATABASE_PASS/g' .env.dev > .env.dev
               env:
                 DATABASE_PASS: ${{ secrets.DATABASE_PASS }}
             - name: Build
@@ -81,7 +81,7 @@ jobs:
             - name: Set up Environment
               shell: bash
               run: |
-                echo "DATABASE_PASS=$DATABASE_PASS" > .env.prod
+                sed 's/DATABASE_PASS=.*/DATABASE_PASS=$DATABASE_PASS/g' .env.prod > .env.prod
               env:
                 DATABASE_PASS: ${{ secrets.DATABASE_PASS }}
             - name: Build
