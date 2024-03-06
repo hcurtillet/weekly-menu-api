@@ -22,7 +22,7 @@ jobs:
             - name: Set up Environment
               shell: bash
               run: |
-                echo "DATABASE_PASS=${{ secrets.DATABASE_PASS }}" > .env.dev
+                echo "DATABASE_PASS=$DATABASE_PASS" > .env.dev
               env:
                 DATABASE_PASS: ${{ secrets.DATABASE_PASS }}
             - name: Build
@@ -41,7 +41,7 @@ jobs:
             - name: Set up Environment
               shell: bash
               run: |
-                echo "DATABASE_PASS=${{ secrets.DATABASE_PASS }}" > .env.prod
+                echo "DATABASE_PASS=$DATABASE_PASS" > .env.prod
               env:
                 DATABASE_PASS: ${{ secrets.DATABASE_PASS }}
             - name: Build
@@ -61,7 +61,7 @@ jobs:
             - name: Set up Environment
               shell: bash
               run: |
-                echo "DATABASE_PASS=${{ secrets.DATABASE_PASS }}" > .env.prod
+                echo "DATABASE_PASS=$DATABASE_PASS" > .env.prod
               env:
                 DATABASE_PASS: ${{ secrets.DATABASE_PASS }}
             - name: Build
@@ -81,7 +81,7 @@ jobs:
             - name: Set up Environment
               shell: bash
               run: |
-                echo "DATABASE_PASS=${{ secrets.DATABASE_PASS }}" > .env.prod
+                echo "DATABASE_PASS=$DATABASE_PASS" > .env.prod
               env:
                 DATABASE_PASS: ${{ secrets.DATABASE_PASS }}
             - name: Build
