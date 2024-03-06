@@ -5,7 +5,7 @@ version: '3.8'
 services:
   # app service for your backend
   app:
-    container_name: weekly-menu.api
+    container_name: ${API_CONTAINER_NAME}
     build:
       context: ./
       dockerfile: Dockerfile
@@ -16,7 +16,7 @@ services:
       DATABASE_NAME: ${DATABASE_NAME}
       DATABASE_USER: ${DATABASE_USER}
       DATABASE_PASS: ${DATABASE_PASS}
-      DATABASE_URI:  'mongodb://weekly-menu.db:27017'
+      DATABASE_URI:  mongodb://${DB_CONTAINER_NAME}:27017
     ports:
       - ${API_EXTERNAL_PORT}:3000
     depends_on:
@@ -25,7 +25,7 @@ services:
   # start the mongodb service as container
   database:
     image: mongodb/mongodb-community-server:latest
-    container_name: weekly-menu.db
+    container_name: ${DB_CONTAINER_NAME}
     restart: always
     mem_reservation: 300m
     cpu_count: 1
