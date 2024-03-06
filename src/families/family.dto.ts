@@ -1,14 +1,13 @@
 import { UserDto } from '@users/user.dto';
 import { IsNotEmpty, IsString, ValidateIf } from 'class-validator';
+import { BaseDto } from '@shared/dto';
 
-export class FamilyDto {
+export class FamilyDto extends BaseDto {
   @IsString()
   @IsNotEmpty()
   readonly name: string;
-  @IsString({
-    message: 'Description must be a string',
-  })
-  @ValidateIf((object, value) => value !== undefined)
+  @IsString()
+  @ValidateIf((_, value) => value !== undefined)
   readonly description?: string;
   readonly members: UserDto[];
 }

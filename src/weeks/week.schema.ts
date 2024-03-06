@@ -2,6 +2,7 @@ import mongoose, { HydratedDocument } from 'mongoose';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { User } from '@users/user.schema';
 import { Family, FamilyDocument } from '@families/family.schema';
+import { BaseSchema } from '@shared/schema';
 
 export enum MealType {
   Breakfast = 'Breakfast',
@@ -41,8 +42,8 @@ export class Day {
 
 export type WeekDocument = HydratedDocument<Week>;
 
-@Schema({ collection: 'weeks', timestamps: true })
-export class Week {
+@Schema({ collection: 'weeks', timestamps: true, virtuals: true })
+export class Week extends BaseSchema {
   @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: Family.name }] })
   family: FamilyDocument;
   @Prop({ type: String, required: true })

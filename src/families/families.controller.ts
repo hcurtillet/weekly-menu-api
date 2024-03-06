@@ -25,8 +25,10 @@ export class FamiliesController {
   }
 
   @Get()
-  async findAll(): Promise<Family[]> {
-    return this.familiesService.findAll();
+  async findAll(): Promise<FamilyDto[]> {
+    return this.familiesService
+      .findAll()
+      .then((families) => families.map(formatFamily));
   }
 
   @Get(':id')
@@ -35,8 +37,8 @@ export class FamiliesController {
   }
 
   @Get('user/:userId')
-  async findFamilyByUser(@Param('userId') userId: string): Promise<Family> {
-    return this.familiesService.findFamilyByUser(userId);
+  async findFamilyByUser(@Param('userId') userId: string): Promise<FamilyDto> {
+    return this.familiesService.findFamilyByUser(userId).then(formatFamily);
   }
 
   @Put(':id')
